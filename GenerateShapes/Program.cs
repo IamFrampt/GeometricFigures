@@ -10,7 +10,7 @@ bool randomizeValues = false, userInputValid = false, pairFound = false;
 float[] userFloatValues = new float[3];
 Vector3 userVector = Vector3.Zero;
 
-Shape[] Shapes = new Shape[creatingThisAmountOfShapes];
+Shape[] ShapesCreated = new Shape[creatingThisAmountOfShapes];
 Dictionary<Shape.Shapes, int> shapeCountersDictionary = new Dictionary<Shape.Shapes, int>();
 Tuple<float, float, string, float> Calculations = new Tuple<float, float, string, float>(0, 0, string.Empty, 0);
 
@@ -65,14 +65,14 @@ do
 
 Console.Clear();
 
-Shapes = CreateShapes(creatingThisAmountOfShapes);
-Calculations = CalculatingValues(Shapes);
+ShapesCreated = CreateShapes(creatingThisAmountOfShapes);
+Calculations = CalculatingValues(ShapesCreated);
 shapeCountersDictionary = Shape.Dictionary();
 
 //Sorting by name
-Array.Sort(Shapes, (firstShape, secondShape) => firstShape.Name.Length == secondShape.Name.Length ? firstShape.CompareTo(secondShape) : firstShape.Name.Length - secondShape.Name.Length);
+Array.Sort(ShapesCreated, (firstShape, secondShape) => firstShape.Name.Length == secondShape.Name.Length ? firstShape.CompareTo(secondShape) : firstShape.Name.Length - secondShape.Name.Length);
 
-PrintResult(Shapes, shapeCountersDictionary, Calculations);
+PrintResult(ShapesCreated, shapeCountersDictionary, Calculations);
 
 //**********************METHODS**********************
 
@@ -97,7 +97,6 @@ Tuple<float, float, string, float> CalculatingValues(Shape[] shapes)
     float totalArea = 0;
     float averageAreaOfAllShapes;
     float circumferenceOfAllTriangles = 0;
-
     string ShapeWithHighestVolume = string.Empty;
     float HighestVolumeOfAllShapes = 0;
     float TempHighestVolume = 0;
