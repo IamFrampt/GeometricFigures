@@ -48,7 +48,7 @@ namespace GeometricFigures
                 _ => throw new Exception("Unreachable shape!"),
             };
         }
-        public static Shape GenerateShape(Vector3 position)
+        public static Shape GenerateShape(Vector3 position) 
         {
             return WhatShapeToCreate() switch
             {
@@ -58,7 +58,7 @@ namespace GeometricFigures
 
                 Shapes.Square => new Rectangle(center: new Vector2(position.X, position.Y), width: RandomizeSideLength()),
 
-                Shapes.Cuboid => new Cuboid(center: position, size: new Vector3(RandomizeSideLength(), RandomizeSideLength(),RandomizeSideLength())),
+                Shapes.Cuboid => new Cuboid(center: position, size: new Vector3(RandomizeSideLength(), RandomizeSideLength(), RandomizeSideLength())),
 
                 Shapes.Cube => new Cuboid(center: position, width: RandomizeSideLength()),
 
@@ -71,32 +71,17 @@ namespace GeometricFigures
         }
         static Shapes WhatShapeToCreate()
         {
-            switch (random.Next((int)Shapes.Amount))
+            return (random.Next((int)Shapes.Amount)) switch
             {
-                case 0:
-                    return Shapes.Circle;
-                    break;
-                case 1:
-                    return Shapes.Rectangle;
-                    break;
-                case 2:
-                    return Shapes.Square;
-                    break;
-                case 3:
-                    return Shapes.Triangle;
-                    break;
-                case 4:
-                    return Shapes.Cube;
-                    break;
-                case 5:
-                    return Shapes.Cuboid;
-                    break;
-                case 6:
-                    return Shapes.Sphere;
-                    break;
-
-                default: throw new Exception("Unreachable shape");
-            }
+                0 => Shapes.Circle,
+                1 => Shapes.Rectangle,
+                2 => Shapes.Square,
+                3 => Shapes.Triangle,
+                4 => Shapes.Cube,
+                5 => Shapes.Cuboid,
+                6 => Shapes.Sphere,
+                _ => throw new Exception("Unreachable shape"),
+            };
         }
 
         private static Vector2 RandomVector2()
@@ -114,18 +99,6 @@ namespace GeometricFigures
             float value = MathF.Round(random.NextSingle() * 100 + 1, 2);
             return value;
         }
-
-        //public static Dictionary<Shapes, int> Dictionary()
-        //{
-        //    Dictionary<Shapes, int> Counter = new Dictionary<Shapes, int>();
-        //    for (int i = 0; i < shapeCounter.Length; i++)
-        //    {
-        //        if (shapeCounter[i] > 0)
-        //            Counter.Add((Shapes)i, shapeCounter[i]);
-        //    }
-        //    return (from entry in Counter orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
-        //}
-
         public int CompareTo(object? obj)
         {
             return Name.CompareTo((obj as Shape).Name);

@@ -138,7 +138,6 @@ Dictionary<Shapes, int> ShapeDictionary(Shape[] ShapesCreated)
     return (from entry in Counter orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
 }
 
-
 Tuple<float, float, string, float> CalculatingValues(Shape[] shapes)
 {
     float totalArea = 0;
@@ -165,6 +164,7 @@ Tuple<float, float, string, float> CalculatingValues(Shape[] shapes)
             }
         }
     }
+
     averageAreaOfAllShapes = totalArea / shapes.Length;
 
     return Tuple.Create(averageAreaOfAllShapes, circumferenceOfAllTriangles, ShapeWithHighestVolume, HighestVolumeOfAllShapes);
