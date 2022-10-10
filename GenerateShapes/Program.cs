@@ -125,6 +125,7 @@ Dictionary<Shapes, int> ShapeDictionary(Shape[] ShapesCreated)
                 shapeCounter[6]++;
                 break;
             default:
+                throw new Exception("Unreachable shape!");
                 break;
         }
     }
