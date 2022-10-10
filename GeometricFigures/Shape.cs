@@ -22,7 +22,6 @@ namespace GeometricFigures
 
         private static float minCoordinate = -100f;
         private static float maxCoordinate = 100f;
-        public static int[] shapeCounter = new int[(int)Shapes.Amount];
 
         public abstract string Name { get; }
         public abstract Vector3 Center { get; }
@@ -75,31 +74,24 @@ namespace GeometricFigures
             switch (random.Next((int)Shapes.Amount))
             {
                 case 0:
-                    shapeCounter[0]++;
                     return Shapes.Circle;
                     break;
                 case 1:
-                    shapeCounter[1]++;
                     return Shapes.Rectangle;
                     break;
                 case 2:
-                    shapeCounter[2]++;
                     return Shapes.Square;
                     break;
                 case 3:
-                    shapeCounter[3]++;
                     return Shapes.Triangle;
                     break;
                 case 4:
-                    shapeCounter[4]++;
                     return Shapes.Cube;
                     break;
                 case 5:
-                    shapeCounter[5]++;
                     return Shapes.Cuboid;
                     break;
                 case 6:
-                    shapeCounter[6]++;
                     return Shapes.Sphere;
                     break;
 
@@ -123,16 +115,17 @@ namespace GeometricFigures
             return value;
         }
 
-        public static Dictionary<Shapes, int> Dictionary()
-        {
-            Dictionary<Shapes, int> Counter = new Dictionary<Shapes, int>();
-            for (int i = 0; i < shapeCounter.Length; i++)
-            {
-                if (shapeCounter[i] > 0)
-                    Counter.Add((Shapes)i, shapeCounter[i]);
-            }
-            return (from entry in Counter orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
-        }
+        //public static Dictionary<Shapes, int> Dictionary()
+        //{
+        //    Dictionary<Shapes, int> Counter = new Dictionary<Shapes, int>();
+        //    for (int i = 0; i < shapeCounter.Length; i++)
+        //    {
+        //        if (shapeCounter[i] > 0)
+        //            Counter.Add((Shapes)i, shapeCounter[i]);
+        //    }
+        //    return (from entry in Counter orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
+        //}
+
         public int CompareTo(object? obj)
         {
             return Name.CompareTo((obj as Shape).Name);

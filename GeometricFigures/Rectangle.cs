@@ -13,7 +13,7 @@ namespace GeometricFigures
         private bool IsSquare => _isSquare =Width == Height;
         public override Vector3 Center => _center;
         public override float Area => _area = Width * Height;
-        public override float Circumference() => _circumference = (Width *2)  + (Height * 2);
+        public override float Circumference => _circumference = (Width *2)  + (Height * 2);
 
         public Rectangle(Vector2 center, Vector2 size)
         {

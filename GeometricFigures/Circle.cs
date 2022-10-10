@@ -10,7 +10,7 @@ namespace GeometricFigures
         public override string Name => "Circle";
         public override Vector3 Center => _center;
         public override float Area => _area = MathF.Pow(_radius, 2) * MathF.PI;
-        public override float Circumference() => _circumference = (_radius * 2) * MathF.PI;
+        public override float Circumference => _circumference = (_radius * 2) * MathF.PI;
 
         public Circle(Vector2 center, float radius)
         {

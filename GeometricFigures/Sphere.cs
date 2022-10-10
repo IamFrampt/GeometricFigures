@@ -11,7 +11,7 @@ namespace GeometricFigures
         public override string Name => "Sphere";
         public override Vector3 Center => _center;
         public override float Area => _area = MathF.Pow(_radius, 2) * 4 * MathF.PI;
-        public override float Volume() => _volume = (4 * MathF.PI * MathF.Pow(_radius, 3)) / 3;
+        public override float Volume => _volume = (4 * MathF.PI * MathF.Pow(_radius, 3)) / 3;
 
         public Sphere(Vector3 center, float radius)
         {

@@ -1,6 +1,4 @@
 ﻿using System.Numerics;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
 
 namespace GeometricFigures
 {
@@ -14,14 +12,18 @@ namespace GeometricFigures
         public override string Name => IsCube ? "Cube" : "Cuboid";
         private bool IsCube => _isCube = Width == Height && Width == Length;
         public override Vector3 Center => _center;
-        public override float Area => _area = Width * Height;
-        public override float Volume() => _volume = _area * Length;
+        public override float Area => _area;
+        public override float Volume => _volume;
 
         public Cuboid(Vector3 center, Vector3 size)
         {
             Width = size.X;
             Height = size.Y;
             Length = size.Z;
+
+            _area = (2 * Width * Height) + (2 * Length * Height) + (2 * Width * Length);
+
+            _volume = Width * Height * Length;
 
             _center = new Vector3(center.X, center.Y, center.Z);
         }
@@ -32,10 +34,10 @@ namespace GeometricFigures
             Height = width;
             Length = width;
 
-            _area = MathF.Pow(width, 2);
+            _area = 6 * MathF.Pow(width, 2);
             _volume = MathF.Pow(width, 3);
         }
 
-        public override string ToString() => base.ToString() + (IsCube? $": w:h:l = {Width.ToString("F2", Culture)}" : $": w = {Width.ToString("F2", Culture)}, h = {Height.ToString("F2", Culture)}, l = {Length.ToString("F2", Culture)}");
-    } 
+        public override string ToString() => base.ToString() + (IsCube ? $": w:h:l = {Width.ToString("F2", Culture)}" : $": w = {Width.ToString("F2", Culture)}, h = {Height.ToString("F2", Culture)}, l = {Length.ToString("F2", Culture)}");
+    }
 }

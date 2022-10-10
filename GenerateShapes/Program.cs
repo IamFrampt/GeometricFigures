@@ -1,5 +1,8 @@
 ﻿using GeometricFigures;
+using System.Collections.Generic;
 using System.Numerics;
+using static GeometricFigures.Shape;
+
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 //*********************VARIABLES*********************
@@ -66,8 +69,8 @@ do
 Console.Clear();
 
 ShapesCreated = CreateShapes(creatingThisAmountOfShapes);
+shapeCountersDictionary = ShapeDictionary(ShapesCreated);
 Calculations = CalculatingValues(ShapesCreated);
-shapeCountersDictionary = Shape.Dictionary();
 
 //Sorting by name
 Array.Sort(ShapesCreated, (firstShape, secondShape) => firstShape.Name.Length == secondShape.Name.Length ? firstShape.CompareTo(secondShape) : firstShape.Name.Length - secondShape.Name.Length);
@@ -92,6 +95,50 @@ Shape[] CreateShapes(int amount)
     return shapes;
 }
 
+Dictionary<Shapes, int> ShapeDictionary(Shape[] ShapesCreated)
+{
+    int[] shapeCounter = new int[ShapesCreated.Length];
+
+    foreach (Shape shape in ShapesCreated)
+    {
+        switch (shape.Name)
+        {
+            case "Circle":
+                shapeCounter[0]++;
+                break;
+            case "Rectangle":
+                shapeCounter[1]++;
+                break;
+            case "Square":
+                shapeCounter[2]++;
+                break;
+            case "Triangle":
+                shapeCounter[3]++;
+                break;
+            case "Cube":
+                shapeCounter[4]++;
+                break;
+            case "Cuboid":
+                shapeCounter[5]++;
+                break;
+            case "Sphere":
+                shapeCounter[6]++;
+                break;
+            default:
+                break;
+        }
+    }
+    
+    Dictionary<Shapes, int> Counter = new Dictionary<Shapes, int>();
+    for (int i = 0; i < shapeCounter.Length; i++)
+    {
+        if (shapeCounter[i] > 0)
+            Counter.Add((Shapes)i, shapeCounter[i]);
+    }
+    return (from entry in Counter orderby entry.Value descending select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
+}
+
+
 Tuple<float, float, string, float> CalculatingValues(Shape[] shapes)
 {
     float totalArea = 0;
@@ -99,8 +146,6 @@ Tuple<float, float, string, float> CalculatingValues(Shape[] shapes)
     float circumferenceOfAllTriangles = 0;
     string ShapeWithHighestVolume = string.Empty;
     float HighestVolumeOfAllShapes = 0;
-    float TempHighestVolume = 0;
-
 
     for (int i = 0; i < shapes.Length; i++)
     {
@@ -108,17 +153,16 @@ Tuple<float, float, string, float> CalculatingValues(Shape[] shapes)
 
         if (shapes[i] is Triangle triangle)
         {
-            circumferenceOfAllTriangles += triangle.Circumference();
+            circumferenceOfAllTriangles += triangle.Circumference;
         }
 
         if (shapes[i] is Shape3D s3D)
         {
-            if (s3D.Volume() > TempHighestVolume)
+            if (s3D.Volume > HighestVolumeOfAllShapes)
             {
-                HighestVolumeOfAllShapes = s3D.Volume();
+                HighestVolumeOfAllShapes = s3D.Volume;
                 ShapeWithHighestVolume = s3D.Name;
             }
-            TempHighestVolume = s3D.Volume();
         }
     }
     averageAreaOfAllShapes = totalArea / shapes.Length;
@@ -192,4 +236,5 @@ void PrintResult(Shape[] Shapes, Dictionary<Shape.Shapes, int> shapeCounters, Tu
                 break;
         }
     }
+
 }

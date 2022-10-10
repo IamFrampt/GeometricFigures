@@ -12,9 +12,9 @@ namespace GeometricFigures
 
         public override string Name => "Triangle";
         public override Vector3 Center => new Vector3(_center,0);
-        public override float Circumference() => _circumference = BCSide + CASide + ABSide;
+        public override float Circumference => _circumference = BCSide + CASide + ABSide;
         public override float Area => _area = MathF.Sqrt(Semiperimeter * (Semiperimeter - BCSide) * (Semiperimeter - CASide) * (Semiperimeter - ABSide));
-        private float Semiperimeter => _semiperimeter = Circumference() / 2;
+        private float Semiperimeter => _semiperimeter = Circumference / 2;
         private float ABSide => _abSide = Vector2.Distance(P1, P2);
         private float BCSide => _bcSide= Vector2.Distance(P2, P3);
         private float CASide => _caSide = Vector2.Distance(P1, P3);
