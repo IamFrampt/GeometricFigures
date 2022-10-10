@@ -31,8 +31,6 @@ namespace GeometricFigures
         public Cuboid(Vector3 center, float width) : this(center, Vector3.Zero)
         {
             Width = width;
-            Height = width;
-            Length = width;
 
             _area = 6 * MathF.Pow(width, 2);
             _volume = MathF.Pow(width, 3);
